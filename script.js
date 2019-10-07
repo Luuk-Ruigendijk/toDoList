@@ -39,6 +39,26 @@ function removeTable(tableId){
 	removeTableElement.remove();
 }
 
+function removeTable(tableId){
+	var removeTableElement = document.getElementById(tableId);
+	removeTableElement.remove();
+}
+
+function removeItem(itemId){
+	var removeItemElement = document.getElementById(itemId);
+	removeItemElement.remove();
+}
+
+function editTableName(tableId){
+	var removeItemElement = document.getElementById(itemId);
+	removeItemElement.remove();
+}
+
+function editItemName(itemId){
+	var removeItemElement = document.getElementById(itemId);
+	removeItemElement.remove();
+}
+
 function createItem(tableId){
 	var createItemName = prompt("What task do you want to add?", "");
 	if (createItemName == null || createItemName == "") {
@@ -47,21 +67,33 @@ function createItem(tableId){
   	else {
 	var itemFieldCreation = document.createElement("tr");
 	var itemNameCreation = document.createElement("td");
+	var itemDeleteButtonCreation = document.createElement("button");
 	howManyItems = 0;
 	itemFieldCreation.setAttribute("class", "itemFrom"+tableId);
-	//countItems();
-	//itemFieldCreation.setAttribute("id", tableId+"item"+howManyItems);
+	countItems(tableId);
+	itemFieldCreation.setAttribute("id", "item"+howManyItems+"fromTable"+tableId);
 	//itemFieldCreation.setAttribute("class", tableId+"item"+howManyItems);
 	itemNameCreation.innerHTML = createItemName;
-	document.getElementById("table"+howManyTables).appendChild(itemFieldCreation);
+	document.getElementById(tableId).appendChild(itemFieldCreation);
 	itemFieldCreation.appendChild(itemNameCreation);
-	itemFieldCreation.appendChild(itemCreation);
+	itemFieldCreation.appendChild(itemDeleteButtonCreation);
+	itemDeleteButtonCreation.innerHTML = "delete item";
+	var itemId = "item"+howManyItems+"fromTable"+tableId;
+	itemDeleteButtonCreation.addEventListener("click", function() {
+	  		removeItem(itemId);
+		});
 	}	
 }
 
-/*function countItems{
-	if ("table"+tableId+"item"+howManyItems == true) {howManyItems++; countItems()}
-}*/
+function countItems(tableId){
+	let itemsInThisTable = document.getElementsByClassName("itemFrom"+tableId);
+	for (let selectedTable = 0; selectedTable < itemsInThisTable.length; selectedTable++) {
+		howManyItems++;
+	}
+
+
+	//if ("table"+tableId+"item"+howManyItems == true) {howManyItems++; countItems()}
+}
 
 var currentTest = 0;
 var checkTheConsole = "test"+currentTest;
